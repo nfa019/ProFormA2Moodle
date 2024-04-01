@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ProFormATaskConverter:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ProFormATaskConverter_jar</output-path>
+    <root id="archive" name="ProFormATaskConverter.jar">
+      <element id="module-output" name="ProFormATaskConverter" />
+    </root>
+  </artifact>
+</component>
