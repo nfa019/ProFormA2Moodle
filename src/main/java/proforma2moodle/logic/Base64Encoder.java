@@ -1,4 +1,4 @@
-package logic;
+package main.java.proforma2moodle.logic;
 
 import java.util.Base64;
 import java.nio.file.Files;

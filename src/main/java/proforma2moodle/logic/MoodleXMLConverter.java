@@ -1,6 +1,6 @@
-package logic;
+package main.java.proforma2moodle.logic;
 
-import Entity.TaskXMLData;
+import main.java.proforma2moodle.Entity.TaskXMLData;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Document;
 import javax.xml.parsers.DocumentBuilder;

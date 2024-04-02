@@ -1,15 +1,14 @@
-package logic;
+package main.java.proforma2moodle.logic;
 
-import Entity.TaskXMLData;
+import main.java.proforma2moodle.Entity.TaskXMLData;
 import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
+
 import java.io.IOException;
-import java.net.StandardSocketOptions;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 

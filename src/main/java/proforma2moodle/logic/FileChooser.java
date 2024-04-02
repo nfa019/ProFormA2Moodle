@@ -1,11 +1,11 @@
-package logic;
+package main.java.proforma2moodle.logic;
 
 import java.io.*;
 import javax.swing.*;
 import java.util.*;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipEntry;
-import Entity.TaskXMLData;
+import main.java.proforma2moodle.Entity.TaskXMLData;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 

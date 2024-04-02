@@ -1,4 +1,4 @@
-package gui;
+package main.java.proforma2moodle.gui;
 
 import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
@@ -6,8 +6,8 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-import Entity.TaskXMLData;
-import logic.FileChooser;
+import main.java.proforma2moodle.Entity.TaskXMLData;
+import main.java.proforma2moodle.logic.FileChooser;
 import org.xml.sax.SAXException;
 
 /**
@@ -26,11 +26,16 @@ public class Main {
      *
      */
     public static void main(String[] args) {
-        TaskXMLData.setCategoryPath(args[0]);
-        TaskXMLData.setOutputPath(args[1]);
+
         if(args.length == 2){
+            // Gui für XML Datei Auswahl
+            TaskXMLData.setCategoryPath(args[0]);
+            TaskXMLData.setOutputPath(args[1]);
             launchGUI(args[0], args[1]);
-        }else {
+        } else if (args.length == 3) {
+            // alles über Konsole
+            convertToMoodleXML(args[0], args[1],args[2]);
+        } else {
             System.err.println("Ungueltige Anzahl von Argumenten.\n");
         }
     }

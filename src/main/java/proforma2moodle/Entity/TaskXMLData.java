@@ -1,4 +1,4 @@
-package Entity;
+package main.java.proforma2moodle.Entity;
 
 import java.io.File;
 /**
