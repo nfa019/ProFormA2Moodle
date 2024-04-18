@@ -1,4 +1,4 @@
-package main.java.proforma2moodle.gui;
+package proforma2moodle.gui;
 
 import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
@@ -6,8 +6,8 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-import main.java.proforma2moodle.Entity.TaskXMLData;
-import main.java.proforma2moodle.logic.FileChooser;
+import proforma2moodle.Entity.TaskXMLData;
+import proforma2moodle.logic.FileChooser;
 import org.xml.sax.SAXException;
 
 /**
@@ -15,8 +15,8 @@ import org.xml.sax.SAXException;
  * Diese Klasse erstellt und zeigt das Hauptfenster der Anwendung an,
  * das für das Oeffnen und Bearbeiten von XML-Dateien verwendet wird.
  */
-public class Main {
-    private static final String APPLICATION_TITLE = "ProFormATaskConverter";
+public class ProFormA2Moodle {
+    private static final String APPLICATION_TITLE = "ProFormA2Moodle";
 
     /**
      * Der Einstiegspunkt der Anwendung.
@@ -68,7 +68,7 @@ public class Main {
     private static void launchGUI(String categoryPath, String outputPath) {
         TaskXMLData.setCategoryPath(categoryPath);
         TaskXMLData.setOutputPath(outputPath);
-        javax.swing.SwingUtilities.invokeLater(Main::createAndShowGUI);
+        javax.swing.SwingUtilities.invokeLater(proforma2moodle.gui.ProFormA2Moodle::createAndShowGUI);
     }
 
     /**

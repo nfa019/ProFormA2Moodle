@@ -1,11 +1,11 @@
-package main.java.proforma2moodle.logic;
+package proforma2moodle.logic;
 
 import java.io.*;
 import javax.swing.*;
 import java.util.*;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipEntry;
-import main.java.proforma2moodle.Entity.TaskXMLData;
+import proforma2moodle.Entity.TaskXMLData;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -80,7 +80,7 @@ public class FileChooser {
             Enumeration<? extends ZipEntry> entries = zip.entries();
             while (entries.hasMoreElements()) {
                 ZipEntry entry = entries.nextElement();
-                System.out.println("Processing ZIP entry: " + entry.getName());
+               // System.out.println("Processing ZIP entry: " + entry.getName());
                 if (entry.getName().toLowerCase().endsWith("task.xml")) {
                     File tempFile = File.createTempFile("task", ".xml");
                     tempFile.deleteOnExit();

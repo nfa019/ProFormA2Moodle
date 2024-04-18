@@ -1,4 +1,4 @@
-package main.java.proforma2moodle.Entity;
+package proforma2moodle.Entity;
 
 import java.io.File;
 /**
@@ -8,6 +8,7 @@ import java.io.File;
  */
 public class TaskXMLData {
     private static String categoryPath;
+    private static String categoryName;
     private static String outputPath;
     private File taskXMLDatei;
     private String questionName;
@@ -18,6 +19,69 @@ public class TaskXMLData {
     private String graderName;
     private String graderVersion;
     private String Taskuuid;
+    private String enableFileSubmissions = "1"; //DEFAULT
+    private String enableFreeTextSubmissions = "0"; //DEFAULT
+    private String ftsNumInitialFields = "1"; // DEFAULT
+    private String ftsMaxnumFields = "10"; // DEFAULT NACH settings.php
+    private String ftsAutoGenerateFileNames = "0"; // DEFAULT
+    private String penalty = "0";
+    private String defaultgrade= "1";
+
+    public String getPenalty() {
+        return penalty;
+    }
+
+    public void setPenalty(String penalty) {
+        this.penalty = penalty;
+    }
+
+    public String getDefaultgrade() {
+        return defaultgrade;
+    }
+
+    public void setDefaultgrade(String defaultgrade) {
+        this.defaultgrade = defaultgrade;
+    }
+
+    public String getEnableFileSubmissions() {
+        return enableFileSubmissions;
+    }
+
+    public void setEnableFileSubmissions(String enableFileSubmissions) {
+        this.enableFileSubmissions = enableFileSubmissions;
+    }
+
+    public String getEnableFreeTextSubmissions() {
+        return enableFreeTextSubmissions;
+    }
+
+    public void setEnableFreeTextSubmissions(String enableFreeTextSubmissions) {
+        this.enableFreeTextSubmissions = enableFreeTextSubmissions;
+    }
+
+    public String getFtsNumInitialFields() {
+        return ftsNumInitialFields;
+    }
+
+    public void setFtsNumInitialFields(String ftsNumInitialFields) {
+        this.ftsNumInitialFields = ftsNumInitialFields;
+    }
+
+    public String getFtsMaxnumFields() {
+        return ftsMaxnumFields;
+    }
+
+    public void setFtsMaxnumFields(String ftsMaxnumFields) {
+        this.ftsMaxnumFields = ftsMaxnumFields;
+    }
+
+    public String getFtsAutoGenerateFileNames() {
+        return ftsAutoGenerateFileNames;
+    }
+
+    public void setFtsAutoGenerateFileNames(String ftsAutoGenerateFileNames) {
+        this.ftsAutoGenerateFileNames = ftsAutoGenerateFileNames;
+    }
 
     public TaskXMLData(){
     }
@@ -115,8 +179,12 @@ public class TaskXMLData {
         return categoryPath;
     }
 
+    public static String getCategoryName() { return categoryName; }
+
     public static void setCategoryPath(String categoryPath) {
         TaskXMLData.categoryPath = categoryPath;
+        String[] s = categoryPath.split("/");
+        categoryName = s[s.length-1];
     }
 
     public static String getOutputPath() {
@@ -125,5 +193,10 @@ public class TaskXMLData {
 
     public static void setOutputPath(String outputPath) {
         TaskXMLData.outputPath = outputPath;
+        File outputfile = new File(outputPath);
+        if(!outputfile.exists()){
+				//System.out.println("Create folder: "+outputfile.getAbsolutePath());
+				outputfile.mkdirs();
+		}
     }
 }

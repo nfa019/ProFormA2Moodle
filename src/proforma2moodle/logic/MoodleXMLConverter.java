@@ -1,6 +1,6 @@
-package main.java.proforma2moodle.logic;
+package proforma2moodle.logic;
 
-import main.java.proforma2moodle.Entity.TaskXMLData;
+import proforma2moodle.Entity.TaskXMLData;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Document;
 import javax.xml.parsers.DocumentBuilder;
@@ -76,9 +76,9 @@ public class MoodleXMLConverter {
                 question.appendChild(generalFeedback);
                 addCDATAElement(doc, generalFeedback, "text", data.getGeneralFeedback());
 
-                Element defaultGrade = addElement(doc, question, "defaultgrade", "1"); // DEFAULT
+                Element defaultGrade = addElement(doc, question, "defaultgrade", data.getDefaultgrade());
 
-                Element penalty = addElement(doc, question, "penalty", "0.3333333"); // DEFAULT
+                Element penalty = addElement(doc, question, "penalty", data.getPenalty());
 
                 Element hidden = addElement(doc, question, "hidden", "0"); // DEFAULT
 
@@ -97,15 +97,15 @@ public class MoodleXMLConverter {
 
                 Element showStudScoreCalcScheme = addElement(doc, question, "showstudscorecalcscheme", "1"); //DEFAULT
 
-                Element enableFileSubmissions = addElement(doc, question, "enablefilesubmissions", "1"); //DEFAULT
+                Element enableFileSubmissions = addElement(doc, question, "enablefilesubmissions",  data.getEnableFileSubmissions()); //DEFAULT
 
-                Element enableFreeTextSubmissions = addElement(doc, question, "enablefreetextsubmissions", "0"); //DEFAULT
+                Element enableFreeTextSubmissions = addElement(doc, question, "enablefreetextsubmissions", data.getEnableFreeTextSubmissions()); //DEFAULT
 
-                Element ftsNumInitialFields = addElement(doc, question, "ftsnuminitialfields", "1"); // DEFAULT
+                Element ftsNumInitialFields = addElement(doc, question, "ftsnuminitialfields", data.getFtsNumInitialFields()); // DEFAULT
 
-                Element ftsMaxnumFields = addElement(doc, question, "ftsmaxnumfields", "10"); // DEFAULT NACH settings.php
+                Element ftsMaxnumFields = addElement(doc, question, "ftsmaxnumfields", data.getFtsMaxnumFields()); // DEFAULT NACH settings.php
 
-                Element ftsAutoGenerateFileNames = addElement(doc, question, "ftsautogeneratefilenames", "0"); // DEFAULT
+                Element ftsAutoGenerateFileNames = addElement(doc, question, "ftsautogeneratefilenames", data.getFtsAutoGenerateFileNames()); // DEFAULT
 
                 Element ftsStandardLang = addElement(doc, question, "ftsstandardlang", "txt"); //DEFAULT
 
@@ -117,6 +117,14 @@ public class MoodleXMLConverter {
 
                 Element teacherFeedbackLevel = addElement(doc, question, "teacherfeedbacklevel", "debug"); //DEFAULT
 
+                Element tags = doc.createElement("tags");
+                question.appendChild(tags);
+                Element tagMoopt = doc.createElement("tag");
+                tags.appendChild(tagMoopt);
+                Element textTagMoopt = addElement(doc,tagMoopt,"text","MooPT");
+                Element tagGrader = doc.createElement("tag");
+                tags.appendChild(tagGrader);
+                Element textTagGrader = addElement(doc,tagGrader,"text",data.getGraderName());
             }
 
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
@@ -139,7 +147,14 @@ public class MoodleXMLConverter {
                 }
             }
 
-            try (FileWriter fileWriter = new FileWriter(TaskXMLData.getOutputPath() + File.separator + "MoodleXML" + ".xml")) {
+            String outputname = ".xml";
+            if (!(TaskXMLData.getCategoryName().equals(" ")||TaskXMLData.getCategoryName().isEmpty())) {
+                outputname = "_"+TaskXMLData.getCategoryName()+outputname;
+            }
+            outputname = "MoodleXML"+outputname;
+
+            try (FileWriter fileWriter = new FileWriter(TaskXMLData.getOutputPath() + File.separator
+                    + outputname)) {
                 fileWriter.write(cleanedXml.toString());
             }
 

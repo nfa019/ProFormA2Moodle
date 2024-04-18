@@ -1,4 +1,4 @@
-package main.java.proforma2moodle.logic;
+package proforma2moodle.logic;
 
 import java.util.Comparator;
 import java.util.List;
