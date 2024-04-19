@@ -107,7 +107,7 @@ public class MoodleXMLConverter {
 
                 Element ftsAutoGenerateFileNames = addElement(doc, question, "ftsautogeneratefilenames", data.getFtsAutoGenerateFileNames()); // DEFAULT
 
-                Element ftsStandardLang = addElement(doc, question, "ftsstandardlang", "txt"); //DEFAULT
+                Element ftsStandardLang = addElement(doc, question, "ftsstandardlang", data.getFtsStandardLang()); //DEFAULT
 
                 Element resultSpecFormat = addElement(doc, question, "resultspecformat", "zip"); //DEFAULT
 

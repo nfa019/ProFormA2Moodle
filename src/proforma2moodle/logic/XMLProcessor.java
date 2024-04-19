@@ -129,14 +129,13 @@ public class XMLProcessor {
             }
             if (nodeList1 != null && nodeList1.getLength() > 0) {
                 for (int i = 0; i < nodeList1.getLength(); i++) {
-                    Node node1 = nodeList1.item(i);
+                    Node node1 = nodeList1.item(i); // combined tests
                     if (node1.getNodeName().equals(prefix+"combine")){
                         double ptcom = 0.0d;
                         NamedNodeMap natt= node1.getAttributes();
                         String nameCom = natt.getNamedItem("id").getTextContent();
                         if (natt.getNamedItem("function").getTextContent().equals("sum")) {
                             NodeList nol1 = node1.getChildNodes();
-
                             for (int k = 0; k < nol1.getLength(); k++) {
                                 Node nk = nol1.item(k);
                                 if (nk.getNodeName().equals(prefix + "test-ref")) {
@@ -154,7 +153,7 @@ public class XMLProcessor {
                             }
                         }
                         if (natt.getNamedItem("function").getTextContent().equals("min")) {
-                            NodeList nol1 = node1.getChildNodes();
+                            NodeList nol1 = node1.getChildNodes(); // combined in combined
                             double ptcom1 = 0.0d;
                             for (int k = 0; k < nol1.getLength(); k++) {
                                 Node nk = nol1.item(k);
@@ -167,6 +166,7 @@ public class XMLProcessor {
                             combine13.put(nameCom,ptcom1);
                         }
                         if (combine.containsKey(nameCom)){
+                            // combined in root
                             points += ptcom * Double.parseDouble(combine.get(nameCom));}
                     }
                 }
@@ -175,6 +175,7 @@ public class XMLProcessor {
         }
 
         for (String k : combine11.keySet()){
+            // combined in combined
             points += Double.parseDouble(combine12.get(k)) * combine13.get(k);
         }
         points = Math.round(points);
@@ -185,6 +186,7 @@ public class XMLProcessor {
     /**
      * Extrahiert spezifische Daten aus einem XML-Dokument und speichert sie in einem TaskXMLData-Objekt.
      * Diese Methode liest verschiedene XML-Elemente aus den Metadaten
+     * hier: Freitextfelder und Filenamen
      * und setzt die entsprechenden Eigenschaften im TaskXMLData-Objekt.
      *
      * @param document Das XML-Dokument, aus dem Daten extrahiert werden.
@@ -219,6 +221,7 @@ public class XMLProcessor {
         String proglang = getElementContent(document, this.prefix + "proglang");
 
         String graderName;
+        String freetextlang ="txt";
         String graderVersion = "1.0";
         switch (proglang) {
             case "plaintext":
@@ -229,9 +232,11 @@ public class XMLProcessor {
                 break;
             case "java":
                 graderName = "Graja";
+                freetextlang = "java";
                 break;
             case "SQL":
                 graderName = "Asqlg";
+                freetextlang = "SQL";
                 break;
             default:
                 graderName = "DummyGrader";
@@ -245,6 +250,7 @@ public class XMLProcessor {
 
         extractedData.setGraderName(graderName);
         extractedData.setGraderVersion(graderVersion);
+        extractedData.setFtsStandardLang(freetextlang);
     }
 
     /**

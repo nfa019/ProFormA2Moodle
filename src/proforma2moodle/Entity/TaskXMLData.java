@@ -26,6 +26,15 @@ public class TaskXMLData {
     private String ftsAutoGenerateFileNames = "0"; // DEFAULT
     private String penalty = "0";
     private String defaultgrade= "1";
+    private String ftsStandardLang = "txt"; // DEFAULT
+
+    public String getFtsStandardLang() {
+        return ftsStandardLang;
+    }
+
+    public void setFtsStandardLang(String ftsStandardLang) {
+        this.ftsStandardLang = ftsStandardLang;
+    }
 
     public String getPenalty() {
         return penalty;

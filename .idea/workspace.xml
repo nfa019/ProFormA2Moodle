@@ -4,20 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6fd0d11-6e34-4d83-9eed-649b8dfed23b" name="Changes" comment="Some Refactoring">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="e6fd0d11-6e34-4d83-9eed-649b8dfed23b" name="Changes" comment="Added Defaultgrade from Task, FreeTextFields from Task">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/proforma2moodle/Entity/TaskXMLData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proforma2moodle/Entity/TaskXMLData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/proforma2moodle/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/proforma2moodle/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/proforma2moodle/gui/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proforma2moodle/gui/ProFormA2Moodle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/proforma2moodle/logic/Base64Encoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proforma2moodle/logic/Base64Encoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/proforma2moodle/logic/FileChooser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proforma2moodle/logic/FileChooser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/proforma2moodle/logic/MoodleXMLConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proforma2moodle/logic/MoodleXMLConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/proforma2moodle/logic/VersionComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proforma2moodle/logic/VersionComparator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/proforma2moodle/logic/XMLProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proforma2moodle/logic/XMLProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proforma2moodle/logic/XMLProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proforma2moodle/logic/XMLProcessor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +110,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712073524832</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added Defaultgrade from Task, FreeTextFields from Task">
+      <option name="closed" value="true" />
+      <created>1713448988873</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1713448988873</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -139,17 +136,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Merge from master into main" />
     <MESSAGE value="Some Refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some Refactoring" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/proforma2moodle/logic/XMLProcessor.java</url>
-          <line>123</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Added Defaultgrade from Task, FreeTextFields from Task" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Defaultgrade from Task, FreeTextFields from Task" />
   </component>
 </project>
