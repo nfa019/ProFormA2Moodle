@@ -43,9 +43,10 @@ public class FileChooser {
      * @throws IOException Bei Lese-/Schreibfehlern.
      * @throws SAXException Bei Fehlern in der XML-Verarbeitung.
      */
-    public void chooseAndProcessFile() throws ParserConfigurationException, IOException, SAXException {
+    public String chooseAndProcessFile() throws ParserConfigurationException, IOException, SAXException {
         File chosenFile = chooseFile();
-        chooseAndProcessFile(chosenFile);
+        String message = chooseAndProcessFile(chosenFile);
+        return message;
     }
     /**
      * Verarbeitet eine Datei entsprechend ihrem Typ (XML, ZIP, Verzeichnis).
@@ -54,7 +55,7 @@ public class FileChooser {
      * @throws IOException Bei Lese-/Schreibfehlern.
      * @throws SAXException Bei Fehlern in der XML-Verarbeitung.
      */
-    public void chooseAndProcessFile(File chosenFile) throws ParserConfigurationException, IOException, SAXException {
+    public String chooseAndProcessFile(File chosenFile) throws ParserConfigurationException, IOException, SAXException {
         if (chosenFile != null) {
             if (chosenFile.isDirectory()) {
                 processDirectory(chosenFile);
@@ -67,7 +68,8 @@ public class FileChooser {
             }
         }
         processAllXMLFiles();
-        System.out.println("Anzahl der bearbeiteten XML-Dateien: " + inputData.size());
+        String message = "Anzahl der bearbeiteten XML-Dateien: " + inputData.size();
+        return message;
     }
 
     /**
@@ -154,8 +156,8 @@ public class FileChooser {
      *
      * @return Die ausgewaehlte Datei oder null, falls keine Auswahl getroffen wurde.
      */
-    private File chooseFile() {
-        JFileChooser fileChooser = new JFileChooser();
+    public File chooseFile() {
+        JFileChooser fileChooser = new JFileChooser(System.getProperty("user.dir"));
         fileChooser.setDialogTitle("Choose an XML, ZIP file or Directory");
         fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         fileChooser.setFileFilter(new javax.swing.filechooser.FileFilter() {
@@ -165,6 +167,32 @@ public class FileChooser {
 
             public String getDescription() {
                 return "XML Files, ZIP Archives, and Directories";
+            }
+        });
+
+        int returnVal = fileChooser.showOpenDialog(frame);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            return fileChooser.getSelectedFile();
+        }
+        return null;
+    }
+
+    /**
+     * Oeffnet einen Dateiauswahldialog, um ein Verzeichnis auszuwaehlen.
+     *
+     * @return Die ausgewaehlte Datei oder null, falls keine Auswahl getroffen wurde.
+     */
+    public File chooseDirectory() {
+        JFileChooser fileChooser = new JFileChooser(System.getProperty("user.dir"));
+        fileChooser.setDialogTitle("Choose a Directory for the Result");
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileFilter() {
+            public boolean accept(File f) {
+                return f.isDirectory() ;
+            }
+
+            public String getDescription() {
+                return "Directories";
             }
         });
 

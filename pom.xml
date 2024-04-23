@@ -45,7 +45,7 @@
 							<transformers>
 								<transformer
 										implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>proforma2moodle.gui.ProFormA2Moodle</mainClass>
+									<mainClass>proforma2moodle.ProFormA2Moodle</mainClass>
 								</transformer>
 							</transformers>
 						</configuration>
