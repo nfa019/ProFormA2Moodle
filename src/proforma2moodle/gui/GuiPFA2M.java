@@ -6,6 +6,7 @@ import proforma2moodle.logic.FileChooser;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.util.Enumeration;
 
 public class GuiPFA2M  {
     private static final String APPLICATION_TITLE = "ProFormA2Moodle";
@@ -13,6 +14,15 @@ public class GuiPFA2M  {
     public GuiPFA2M() {
             }
 
+    public static void setUIFont(javax.swing.plaf.FontUIResource f) {
+        Enumeration<Object> keys = UIManager.getDefaults().keys();
+        while (keys.hasMoreElements()) {
+            Object key = keys.nextElement();
+            Object value = UIManager.get(key);
+            if (value instanceof javax.swing.plaf.FontUIResource)
+                UIManager.put(key, f);
+        }
+    }
     /**
      * Startet die grafische Benutzeroberflaeche (GUI) der Anwendung.
      *
@@ -70,8 +80,7 @@ public class GuiPFA2M  {
      * um XML-Dateien, ZIP-Dateien oder ein Verzeichnis zu oeffnen und zu bearbeiten.
      */
     private static void createAndShowGUIforAll() {
-        Font fontBold = new Font("Arial", Font.BOLD, 20);
-        Font fontPlain = new Font("Arial", Font.PLAIN, 20);
+        setUIFont(new javax.swing.plaf.FontUIResource("Sans", Font.PLAIN, 24));
 
         JFrame frame = new JFrame(APPLICATION_TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,14 +95,12 @@ public class GuiPFA2M  {
 
         JLabel labelCat = new JLabel();
         labelCat.setVerticalAlignment(JLabel.TOP);
-        labelCat.setFont(fontBold);
         labelCat.setHorizontalAlignment(JLabel.LEFT);
         labelCat.setHorizontalTextPosition(JLabel.LEFT);
         labelCat.setText("Moodle Question Category");
         mainPanel.add(labelCat);
 
         JTextField textFieldCat = new JTextField(20);
-        textFieldCat.setFont(fontPlain);
         textFieldCat.setSize(600, 80);
         mainPanel.add(textFieldCat);
 
@@ -103,19 +110,16 @@ public class GuiPFA2M  {
 
         JLabel labelStore = new JLabel();
         labelStore.setVerticalAlignment(JLabel.TOP);
-        labelStore.setFont(fontBold);
         labelStore.setHorizontalAlignment(JLabel.LEFT);
         labelStore.setHorizontalTextPosition(JLabel.LEFT);
         labelStore.setText("Directory to store");
         mainPanel.add(labelStore);
 
         JTextField textFieldStore = new JTextField(20);
-        textFieldStore.setFont(fontPlain);
         textFieldStore.setSize(600, 80);
         mainPanel.add(textFieldStore);
 
         JButton buttonStore = new JButton("Choose from directory");
-        buttonStore.setFont(fontBold);
         buttonStore.addActionListener(e -> {
             try {
                 File dir = fileChooser.chooseDirectory();
@@ -131,24 +135,21 @@ public class GuiPFA2M  {
 
         JLabel labelRead = new JLabel();
         labelRead.setVerticalAlignment(JLabel.TOP);
-        labelRead.setFont(fontBold);
         labelRead.setHorizontalAlignment(JLabel.LEFT);
         labelRead.setHorizontalTextPosition(JLabel.LEFT);
         labelRead.setText("Read from");
         mainPanel.add(labelRead);
 
         JTextField textFieldRead = new JTextField(20);
-        textFieldRead.setFont(fontPlain);
         textFieldRead.setSize(600, 80);
         mainPanel.add(textFieldRead);
 
         JButton buttonRead = new JButton("Choose from directory");
-        buttonRead.setFont(fontBold);
         buttonRead.addActionListener(e -> {
             try {
                 fromFile = fileChooser.chooseFile();
-                String path = fromFile.getAbsolutePath();
-                textFieldRead.setText(path);
+                TaskXMLData.setInputPath(fromFile.getAbsolutePath());
+                textFieldRead.setText(TaskXMLData.getInputPath());
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(frame, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -161,6 +162,13 @@ public class GuiPFA2M  {
         buttonAction.addActionListener(e->{
              try {
                 TaskXMLData.setCategoryPath(textFieldCat.getText());
+                if (TaskXMLData.getInputPath().isEmpty()){
+                    TaskXMLData.setInputPath(textFieldRead.getText());
+                    fromFile = new File(textFieldRead.getText());
+                }
+                if (TaskXMLData.getOutputPath().isEmpty()){
+                    TaskXMLData.setOutputPath(textFieldStore.getText());
+                }
                 String message = fileChooser.chooseAndProcessFile(fromFile);
                 JOptionPane.showMessageDialog(frame,message,"Success",JOptionPane.INFORMATION_MESSAGE);
 
@@ -168,7 +176,6 @@ public class GuiPFA2M  {
                 JOptionPane.showMessageDialog(frame, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
-        buttonAction.setFont(fontBold);
         mainPanel.add(buttonAction);
 
         frame.setContentPane(mainPanel);

@@ -56,6 +56,7 @@ public class FileChooser {
      * @throws SAXException Bei Fehlern in der XML-Verarbeitung.
      */
     public String chooseAndProcessFile(File chosenFile) throws ParserConfigurationException, IOException, SAXException {
+        String message = "No input file found.";
         if (chosenFile != null) {
             if (chosenFile.isDirectory()) {
                 processDirectory(chosenFile);
@@ -66,9 +67,11 @@ public class FileChooser {
                 data.setTaskXMLDatei(chosenFile);
                 inputData.add(data);
             }
-        }
+
         processAllXMLFiles();
-        String message = "Anzahl der bearbeiteten XML-Dateien: " + inputData.size();
+        message = "Number of XML files processed " + inputData.size();
+        }
+        inputData = new ArrayList<>();
         return message;
     }
 

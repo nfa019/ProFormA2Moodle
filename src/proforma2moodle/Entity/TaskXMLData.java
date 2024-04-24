@@ -7,9 +7,13 @@ import java.io.File;
  *
  */
 public class TaskXMLData {
-    private static String categoryPath;
-    private static String categoryName;
-    private static String outputPath;
+    private static String categoryPath="";
+    private static String categoryName="";
+    private static String outputPath="";
+    private static String inputPath="";
+
+
+
     private File taskXMLDatei;
     private String questionName;
     private String questionText;
@@ -207,5 +211,13 @@ public class TaskXMLData {
 				//System.out.println("Create folder: "+outputfile.getAbsolutePath());
 				outputfile.mkdirs();
 		}
+    }
+
+    public static String getInputPath() {
+        return inputPath;
+    }
+
+    public static void setInputPath(String inputPath) {
+        TaskXMLData.inputPath = inputPath;
     }
 }
