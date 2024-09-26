@@ -5,12 +5,12 @@
 
 	<groupId>ProFormA2Moodle</groupId>
 	<artifactId>ProFormA2Moodle</artifactId>
-	<version>0.1</version>
+	<version>0.2</version>
 
 	<properties>
 		<jar.finalName>${project.name}</jar.finalName>
 
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>${java.version}</maven.compiler.source>

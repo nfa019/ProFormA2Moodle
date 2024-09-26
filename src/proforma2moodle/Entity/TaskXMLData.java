@@ -1,6 +1,8 @@
 package proforma2moodle.Entity;
 
 import java.io.File;
+import java.util.ArrayList;
+
 /**
  *
  * Die TaskXMLData-Klasse repraesentiert die Daten einer einzelnen Aufgabe, die aus einer XML-Datei extrahiert wurden.
@@ -31,6 +33,43 @@ public class TaskXMLData {
     private String penalty = "0";
     private String defaultgrade= "1";
     private String ftsStandardLang = "txt"; // DEFAULT
+    private String answer = ""; // DEFAULT
+
+    public static class FreeInputField{
+        private String nameSettingsForFreeTextInput = "0";
+        private String freeTextInputFieldName = "";
+        private String ftsOverWrittenLanguage = "txt";
+        private String ftsInitialDisplayRows = "5";
+        private String freeTextInputFieldTemplate = " ";
+
+        public FreeInputField(String nameSettings, String fieldName,
+                              String language, String rows, String template){
+            this.nameSettingsForFreeTextInput = nameSettings;
+            this.freeTextInputFieldName = fieldName;
+            this.ftsOverWrittenLanguage = language;
+            this.ftsInitialDisplayRows = rows;
+            this.freeTextInputFieldTemplate = template;
+        }
+
+        public FreeInputField(String fieldName, String language){
+            this.freeTextInputFieldName = fieldName;
+            this.ftsOverWrittenLanguage = language;
+        }
+
+        public String getNameSettingsForFreeTextInput() { return nameSettingsForFreeTextInput;  }
+
+        public String getFreeTextInputFieldName() { return freeTextInputFieldName; }
+
+        public String getFtsOverWrittenLanguage() { return ftsOverWrittenLanguage; }
+
+        public String getFtsInitialDisplayRows() { return ftsInitialDisplayRows; }
+
+        public String getFreeTextInputFieldTemplate() {return freeTextInputFieldTemplate; }
+    }
+
+    public ArrayList<FreeInputField> ftsList = new ArrayList<FreeInputField>();
+
+
 
     public String getFtsStandardLang() {
         return ftsStandardLang;
@@ -95,6 +134,10 @@ public class TaskXMLData {
     public void setFtsAutoGenerateFileNames(String ftsAutoGenerateFileNames) {
         this.ftsAutoGenerateFileNames = ftsAutoGenerateFileNames;
     }
+
+    public String getAnswer() { return answer;     }
+
+    public void setAnswer(String answer) {  this.answer = answer;     }
 
     public TaskXMLData(){
     }

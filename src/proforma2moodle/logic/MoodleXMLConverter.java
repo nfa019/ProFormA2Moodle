@@ -16,6 +16,7 @@ import org.w3c.dom.Element;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -63,14 +64,6 @@ public class MoodleXMLConverter {
                 question.appendChild(questionText);
                 addCDATAElement(doc, questionText, "text", data.getQuestionText());
 
-
-                Element file = addElement(doc, questionText, "file", Base64Encoder.encodeFileToBase64(data.getFile()));
-                file.setAttribute("name", data.getFileName());
-                file.setAttribute("path", "/");
-                file.setAttribute("encoding", "base64");
-
-
-
                 Element generalFeedback = doc.createElement("generalfeedback");
                 generalFeedback.setAttribute("format", "html");
                 question.appendChild(generalFeedback);
@@ -83,6 +76,36 @@ public class MoodleXMLConverter {
                 Element hidden = addElement(doc, question, "hidden", "0"); // DEFAULT
 
                 Element idNumber = addElement(doc, question, "idnumber", null); //DEFAULT IST EIN LEERES FELD
+
+                Element answer = doc.createElement("answer");
+                answer.setAttribute("fraction","0");
+                question.appendChild(answer);
+                addCDATAElement(doc,answer,"text",data.getAnswer());
+
+                Element taskfile = addElement(doc, question, "taskfile", Base64Encoder.encodeFileToBase64(data.getFile()));
+                taskfile.setAttribute("filearea","taskfile");
+                taskfile.setAttribute("name", data.getFileName());
+                taskfile.setAttribute("path", "/");
+                taskfile.setAttribute("encoding", "base64");
+
+                Element customfts = doc.createElement("customsettingforfreetextinputfields");
+                question.appendChild(customfts);
+                ArrayList<TaskXMLData.FreeInputField> listFTS = data.ftsList;
+                if (!listFTS.isEmpty()){
+                    int nrEl = listFTS.size();
+                    for (int i=0; i<nrEl; i++){
+                        TaskXMLData.FreeInputField fts = listFTS.get(i);
+                        Element field = doc.createElement("field");
+                        customfts.appendChild(field);
+                        String iString = ""+i;
+                        field.setAttribute("index",iString);
+                        Element el = addElement(doc,field,"namesettingsforfreetextinput", fts.getNameSettingsForFreeTextInput());
+                        el = addElement(doc,field,"freetextinputfieldname",fts.getFreeTextInputFieldName());
+                        el = addElement(doc, field, "ftsoverwrittenlang",fts.getFtsOverWrittenLanguage());
+                        el = addElement(doc, field, "ftsinitialdisplayrows",fts.getFtsInitialDisplayRows());
+                        el = addCDATAElement(doc, field, "freetextinputfieldtemplate", fts.getFreeTextInputFieldTemplate());
+                    }
+                }
 
                 Element internalDescription = addCDATAElement(doc, question, "internaldescription", data.getInternalDescription());
                 question.appendChild(internalDescription);
@@ -125,6 +148,8 @@ public class MoodleXMLConverter {
                 Element tagGrader = doc.createElement("tag");
                 tags.appendChild(tagGrader);
                 Element textTagGrader = addElement(doc,tagGrader,"text",data.getGraderName());
+
+
             }
 
             Transformer transformer = TransformerFactory.newInstance().newTransformer();

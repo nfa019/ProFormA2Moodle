@@ -9,6 +9,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,7 @@ public class XMLProcessor {
     };
     private static final Map<String, List<String>> GRADER_VERSIONS = of(
             "Graflap", List.of("1.0"),
-            "Graja", List.of("2.2", "2.3"),
+            "Graja", List.of("2.2", "2.3", "2.4"),
             "Asqlg", List.of("2.0")
     );
     private String prefix;
@@ -199,13 +200,37 @@ public class XMLProcessor {
             extractedData.setEnableFreeTextSubmissions("1");
             extractedData.setFtsNumInitialFields(String.valueOf(nrFields));
             extractedData.setFtsMaxnumFields(String.valueOf(nrFields));
+            boolean notfixed = true;
             for (int i=0; i<nrFields; i++){
                 Node el = nodeList.item(i);
                 NamedNodeMap namedNodeMap = el.getAttributes();
-                if (namedNodeMap.getNamedItem("fixedfilename").equals("true")){
+                if (notfixed && namedNodeMap.getNamedItem("fixedfilename").getTextContent().equals("true")){
                     extractedData.setFtsAutoGenerateFileNames("0");
-                    break;
+                    notfixed =false;
                 }
+                String language = namedNodeMap.getNamedItem("proglang").getTextContent();
+                String fileRef = namedNodeMap.getNamedItem("file-ref").getTextContent();
+                String fileName = "file "+i;
+                NodeList nodes = document.getElementsByTagName(this.prefix+"file");
+                int nrNodes = nodes.getLength();
+                for (int j = 0; j<nrNodes; j++){
+                    Node elFile = nodes.item(j);
+                    NamedNodeMap mapAts = elFile.getAttributes();
+                    if (mapAts.getNamedItem("id").getTextContent().equals(fileRef)){
+                        NodeList elChildren = elFile.getChildNodes();
+                        int nrn = elChildren.getLength();
+                        for (int k=0; k<nrn; k++){
+                             Node elChild = elChildren.item(k);
+                             if (elChild.getNodeName().equals(this.prefix+"embedded-txt-file")){
+                                 NamedNodeMap mapAtfile = elChild.getAttributes();
+                                 fileName = mapAtfile.getNamedItem("filename").getTextContent();
+                                 break;
+                             }
+                        }
+                        break;
+                    }
+                }
+                extractedData.ftsList.add(new TaskXMLData.FreeInputField(fileName,language));
             }
         }
     }
