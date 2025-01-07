@@ -5,7 +5,7 @@
 
 	<groupId>ProFormA2Moodle</groupId>
 	<artifactId>ProFormA2Moodle</artifactId>
-	<version>0.2</version>
+	<version>0.3</version>
 
 	<properties>
 		<jar.finalName>${project.name}</jar.finalName>
