@@ -88,7 +88,7 @@ public class MoodleXMLConverter {
                 taskfile.setAttribute("path", "/");
                 taskfile.setAttribute("encoding", "base64");
 
-                Element customfts = doc.createElement("customsettingforfreetextinputfields");
+                Element customfts = doc.createElement("customsettingsforfreetextinputfields");
                 question.appendChild(customfts);
                 ArrayList<TaskXMLData.FreeInputField> listFTS = data.ftsList;
                 if (!listFTS.isEmpty()){
@@ -104,6 +104,7 @@ public class MoodleXMLConverter {
                         el = addElement(doc, field, "ftsoverwrittenlang",fts.getFtsOverWrittenLanguage());
                         el = addElement(doc, field, "ftsinitialdisplayrows",fts.getFtsInitialDisplayRows());
                         el = addCDATAElement(doc, field, "freetextinputfieldtemplate", fts.getFreeTextInputFieldTemplate());
+                        field.appendChild(el);
                     }
                 }
 

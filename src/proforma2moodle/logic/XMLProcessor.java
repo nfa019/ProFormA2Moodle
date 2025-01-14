@@ -30,7 +30,7 @@ public class XMLProcessor {
             "urn:proforma:lmsinputfields:v0.1"
     };
     private static final Map<String, List<String>> GRADER_VERSIONS = of(
-            "Graflap", List.of("1.0"),
+            "GraFlap", List.of("1.0"),
             "Graja", List.of("2.2", "2.3", "2.4"),
             "Asqlg", List.of("2.0")
     );
@@ -250,10 +250,10 @@ public class XMLProcessor {
         String graderVersion = "1.0";
         switch (proglang) {
             case "plaintext":
-                graderName = "Graflap";
+                graderName = "GraFlap";
                 break;
             case "GraFLAP":
-                graderName = "Graflap";
+                graderName = "GraFlap";
                 break;
             case "java":
                 graderName = "Graja";
