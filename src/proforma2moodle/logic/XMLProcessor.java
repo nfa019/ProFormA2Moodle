@@ -31,8 +31,8 @@ public class XMLProcessor {
     };
     private static final Map<String, List<String>> GRADER_VERSIONS = of(
             "GraFlap", List.of("1.0"),
-            "Graja", List.of("2.2", "2.3", "2.4"),
-            "Asqlg", List.of("2.0")
+            "Graja", List.of("2.2", "2.3", "2.4","2.5"),
+            "Asqlg", List.of("2.0","2.1","2.2")
     );
     private String prefix;
     private String metaPrefix;
@@ -195,7 +195,9 @@ public class XMLProcessor {
      */
     private void extractTaskXMLMetaData(Document document, TaskXMLData extractedData) {
         NodeList nodeList = document.getElementsByTagName(this.metaPrefix+"textfield");
+        NodeList nodeListFiles = document.getElementsByTagName(this.metaPrefix+"fileinput");
         int nrFields = nodeList.getLength();
+        int nrFiles = nodeListFiles.getLength();
         if (nrFields>0){
             extractedData.setEnableFreeTextSubmissions("1");
             extractedData.setFtsNumInitialFields(String.valueOf(nrFields));
@@ -232,6 +234,9 @@ public class XMLProcessor {
                 }
                 extractedData.ftsList.add(new TaskXMLData.FreeInputField(fileName,language));
             }
+        }
+        if (nrFiles==0) {
+            extractedData.setEnableFileSubmissions("0");
         }
     }
 
